@@ -6,10 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_heroe"
         android:layout_width="@dimen/img_size_m"
         android:layout_height="@dimen/img_size_m"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@tools:sample/avatars" />
@@ -19,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
-        android:layout_marginTop="@dimen/margin_size_s"
+        android:textSize="@dimen/text_size_l"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/img_heroe"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -27,19 +29,26 @@
         android:id="@+id/hero_real_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Real Name"
+        android:textSize="@dimen/text_size_m"
+        android:text="@string/real_name"
         android:layout_marginTop="@dimen/margin_size_s"
         app:layout_constraintStart_toEndOf="@id/img_heroe"
         app:layout_constraintTop_toBottomOf="@id/hero_name"/>
 
     <TextView
         android:id="@+id/occupation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/occupation"
+        android:textAlignment="textStart"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:maxWidth="@dimen/img_size_m"
+        android:textSize="@dimen/text_size_m"
         android:layout_marginBottom="@dimen/margin_size_s"
         app:layout_constraintStart_toStartOf="@id/hero_name"
-        app:layout_constraintBottom_toBottomOf="@id/img_heroe"/>
+        app:layout_constraintBottom_toBottomOf="@id/img_heroe"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ImageView
         android:id="@+id/buttom_to_detail"

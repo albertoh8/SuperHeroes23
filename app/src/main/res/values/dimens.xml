@@ -5,4 +5,9 @@
 
     <dimen name="img_size_m">128dp</dimen>
 
+    <dimen name="text_size_l">25sp</dimen>
+    <dimen name="text_size_m">18sp</dimen>
+
+    <dimen name="text_with_l">200dp</dimen>
+
 </resources>
