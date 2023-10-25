@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_size_s">10dp</dimen>
+
+    <dimen name="img_size_m">128dp</dimen>
+
+</resources>
