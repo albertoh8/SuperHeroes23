@@ -5,5 +5,5 @@ import com.iesam.superheroes23.app.ErrorApp
 
 interface WorkRepository {
 
-    fun getWorkByHeroId(heroId:Int):Either<ErrorApp,Work>
+    suspend fun getWorkByHeroId(heroId:Int):Either<ErrorApp,Work?>
 }

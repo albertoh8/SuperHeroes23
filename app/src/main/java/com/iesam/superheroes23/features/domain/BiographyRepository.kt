@@ -5,5 +5,5 @@ import com.iesam.superheroes23.app.ErrorApp
 
 interface BiographyRepository {
 
-    fun getBiographyByHeroId(heroId:Int):Either<ErrorApp,Biography>
+    suspend fun getBiographyByHeroId(heroId:Int):Either<ErrorApp,Biography?>
 }
