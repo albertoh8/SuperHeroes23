@@ -13,13 +13,13 @@ class XmlWorkLocalDataRepository(
     private val context: Context
 ) : WorkLocalDataRepository {
 
-    private val sharedPreferences = context.getSharedPreferences("SuperHeroes", Context.MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences("Work", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
     private val gson = Gson()
     override suspend fun saveWork(heroId:Int,work: Work): Either<ErrorApp, Boolean> {
         try {
             val jsonWork = gson.toJson(work, Work::class.java)
-            editor.putString(work.occupation,jsonWork)
+            editor.putString(heroId.toString(),jsonWork)
             editor.apply()
         }catch (ex: Exception){
             return ErrorApp.DataError.left()
@@ -29,7 +29,7 @@ class XmlWorkLocalDataRepository(
 
     override suspend fun getWork(heroId: Int): Either<ErrorApp, Work> {
         try {
-            val work =  sharedPreferences.getString(heroId.toString(), null).let {
+            val work =  sharedPreferences.getString(heroId.toString(), "1").let {
                 gson.fromJson(it, Work::class.java)
             }
             return work.right()

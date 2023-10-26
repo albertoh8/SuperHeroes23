@@ -13,7 +13,7 @@ class XmlBiographyLocalDataSource(
     private val context: Context
 ) : BiographyLocalDataRepository {
 
-    private val sharedPreferences = context.getSharedPreferences("SuperHeroes", Context.MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences("Biography", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
     private val gson = Gson()
     override suspend fun  saveBiography(heroId: Int, biography: Biography): Either<ErrorApp, Boolean> {

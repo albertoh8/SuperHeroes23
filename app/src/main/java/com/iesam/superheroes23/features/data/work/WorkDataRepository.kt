@@ -2,6 +2,7 @@ package com.iesam.superheroes23.features.data.work
 
 import com.iesam.superheroes23.app.Either
 import com.iesam.superheroes23.app.ErrorApp
+import com.iesam.superheroes23.app.right
 import com.iesam.superheroes23.features.data.work.local.xml.XmlWorkLocalDataRepository
 import com.iesam.superheroes23.features.data.work.remote.WorkRemoteDataRepository
 import com.iesam.superheroes23.features.domain.Work
@@ -12,10 +13,14 @@ class WorkDataRepository(
     private val localSource: XmlWorkLocalDataRepository
 ) : WorkRepository {
     override suspend fun getWorkByHeroId(heroId: Int): Either<ErrorApp, Work?> {
-
-            val work =  remoteSource.getWork(heroId)
-            work.getOrNull()?.let { localSource.saveWork(heroId,it) }
+        if (localSource.getWork(heroId).isRight()){
+            return localSource.getWork(heroId)
+        }else {
+            val work = remoteSource.getWork(heroId)
+            work.getOrNull()?.let { localSource.saveWork(heroId, it) }
             return work
+        }
+
 
 
     }

@@ -12,11 +12,13 @@ class SuperHeroDataRepository(
     private val localSource:XmlSuperheroLocalDataSource
 ) : SuperHeroRepository {
     override suspend fun getAllHeroes(): Either<ErrorApp, List<SuperHero>?> {
-
-            val heroes =  remoteSource.getAllHeroes()
+        if(localSource.getSuperHeroes().isRight()){
+            return localSource.getSuperHeroes()
+        }else {
+            val heroes = remoteSource.getAllHeroes()
             heroes.getOrNull()?.let { localSource.saveSuperHero(it) }
             return heroes
-
+        }
     }
 
     override fun getHeroById(HeroId: Int): Either<ErrorApp, SuperHero> {
