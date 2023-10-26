@@ -12,8 +12,11 @@ class WorkDataRepository(
     private val localSource: XmlWorkLocalDataRepository
 ) : WorkRepository {
     override suspend fun getWorkByHeroId(heroId: Int): Either<ErrorApp, Work?> {
-        val work =  remoteSource.getWork(heroId)
-        work.getOrNull()?.let { localSource.saveWork(it) }
-        return work
+
+            val work =  remoteSource.getWork(heroId)
+            work.getOrNull()?.let { localSource.saveWork(heroId,it) }
+            return work
+
+
     }
 }

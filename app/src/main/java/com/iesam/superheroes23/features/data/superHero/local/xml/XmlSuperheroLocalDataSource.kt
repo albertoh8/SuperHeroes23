@@ -30,5 +30,19 @@ class XmlSuperheroLocalDataSource(
         return true.right()
     }
 
+    override suspend fun getSuperHeroes(): Either<ErrorApp, List<SuperHero>> {
+        try {
+            val superHeros: MutableList<SuperHero> = mutableListOf()
+            sharedPreferences.all.forEach { map ->
+                superHeros.add(gson.fromJson(map.value as String, SuperHero::class.java))
+            }
+            return superHeros.right()
+        }catch (ex:Exception){
+            return ErrorApp.DataError.left()
+        }
+
+
+    }
+
 
 }
