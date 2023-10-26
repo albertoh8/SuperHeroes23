@@ -11,14 +11,17 @@ import com.iesam.superheroes23.R
 import com.iesam.superheroes23.app.ErrorApp
 import com.iesam.superheroes23.app.extensions.hide
 import com.iesam.superheroes23.app.extensions.visible
-import com.iesam.superheroes23.app.right
 import com.iesam.superheroes23.databinding.ActivityMainBinding
 import com.iesam.superheroes23.features.data.ApiClient
 import com.iesam.superheroes23.features.data.biograpphy.BiographyDataRepository
+import com.iesam.superheroes23.features.data.biograpphy.local.BiographyLocalDataRepository
+import com.iesam.superheroes23.features.data.biograpphy.local.xml.XmlBiographyLocalDataSource
 import com.iesam.superheroes23.features.data.biograpphy.remote.api.BiographyRemoteApiSource
 import com.iesam.superheroes23.features.data.superHero.SuperHeroDataRepository
+import com.iesam.superheroes23.features.data.superHero.local.xml.XmlSuperheroLocalDataSource
 import com.iesam.superheroes23.features.data.superHero.remote.api.SuperHeroesRemoteApiSource
 import com.iesam.superheroes23.features.data.work.WorkDataRepository
+import com.iesam.superheroes23.features.data.work.local.xml.XmlWorkLocalDataRepository
 import com.iesam.superheroes23.features.data.work.remote.api.WorkRemoteApiDataSource
 import com.iesam.superheroes23.features.domain.GetSuperHeroesFeedUseCase
 import com.iesam.superheroes23.features.presentation.adapter.SuperHeroesAdapter
@@ -37,13 +40,22 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
             GetSuperHeroesFeedUseCase(
                 SuperHeroDataRepository(
                     SuperHeroesRemoteApiSource(
-                        ApiClient())),
+                        ApiClient()
+                    ),
+                    XmlSuperheroLocalDataSource(this)
+                ),
                 WorkDataRepository(
                     WorkRemoteApiDataSource(
-                        ApiClient())),
+                        ApiClient()
+                    ),
+                    XmlWorkLocalDataRepository(this)
+                ),
                 BiographyDataRepository(
                     BiographyRemoteApiSource(
-                        ApiClient())),
+                        ApiClient()
+                    ),
+                    XmlBiographyLocalDataSource(this)
+                ),
             )
         )
     }
