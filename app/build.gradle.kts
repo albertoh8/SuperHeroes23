@@ -58,11 +58,14 @@ dependencies {
     //Livecycle
     val lifecycle_version = "2.6.2"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation("androidx.activity:activity-ktx:1.7.2")
+    implementation("androidx.activity:activity-ktx:1.8.0")
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
     //Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+    //Skeleton
+    implementation ("com.faltenreich:skeletonlayout:5.0.0")
 }

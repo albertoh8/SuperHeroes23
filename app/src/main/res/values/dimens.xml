@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="margin_size_s">10dp</dimen>
+    <dimen name="margin_size_m">30dp</dimen>
 
     <dimen name="img_size_m">128dp</dimen>
 

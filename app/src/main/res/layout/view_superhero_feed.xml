@@ -1,62 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_size_s"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/img_heroe"
-        android:layout_width="@dimen/img_size_m"
-        android:layout_height="@dimen/img_size_m"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/hero_name"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:textSize="@dimen/text_size_l"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/img_heroe"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_margin="@dimen/margin_size_s">
 
-    <TextView
-        android:id="@+id/hero_real_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_m"
-        android:text="@string/real_name"
-        android:layout_marginTop="@dimen/margin_size_s"
-        app:layout_constraintStart_toEndOf="@id/img_heroe"
-        app:layout_constraintTop_toBottomOf="@id/hero_name"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_heroe"
+            android:layout_width="@dimen/img_size_m"
+            android:layout_height="@dimen/img_size_m"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/occupation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/occupation"
-        android:textAlignment="textStart"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:maxWidth="@dimen/img_size_m"
-        android:textSize="@dimen/text_size_m"
-        android:layout_marginBottom="@dimen/margin_size_s"
-        app:layout_constraintStart_toStartOf="@id/hero_name"
-        app:layout_constraintBottom_toBottomOf="@id/img_heroe"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/hero_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_size_s"
+            android:text="@string/name"
+            android:textSize="@dimen/text_size_l"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_heroe"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/buttom_to_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/img_heroe"/>
+        <TextView
+            android:id="@+id/hero_real_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_size_s"
+            android:text="@string/real_name"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintStart_toStartOf="@id/hero_name"
+            app:layout_constraintTop_toBottomOf="@id/hero_name" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/occupation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_size_s"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/img_size_m"
+            android:maxLines="2"
+            android:text="@string/occupation"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/text_size_m"
+            app:layout_constraintBottom_toBottomOf="@id/img_heroe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/hero_name" />
+
+        <ImageView
+            android:id="@+id/buttom_to_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/img_heroe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
