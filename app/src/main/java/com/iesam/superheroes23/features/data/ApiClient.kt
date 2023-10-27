@@ -1,5 +1,7 @@
 package com.iesam.superheroes23.features.data
 
+import com.iesam.superhero.data.connections.remote.api.ConnectionsApiModel
+import com.iesam.superhero.data.powerstats.remote.api.PowerStatsApiModel
 import com.iesam.superheroes23.app.Either
 import com.iesam.superheroes23.app.ErrorApp
 import com.iesam.superheroes23.app.left
@@ -51,6 +53,24 @@ class ApiClient  {
         val biography = apiServices.getBiography(heroId)
         if(biography.isSuccessful){
             return biography.body().right()
+        }else{
+            return ErrorApp.InternetError.left()
+        }
+    }
+
+    suspend fun getConnections(heroId: Int): Either<ErrorApp,ConnectionsApiModel?> {
+        val connects = apiServices.getConnections(heroId)
+        if (connects.isSuccessful){
+            return connects.body().right()
+        }else{
+            return ErrorApp.InternetError.left()
+        }
+    }
+
+    suspend fun getPowerStats(heroId: Int): Either<ErrorApp,PowerStatsApiModel?>  {
+        val stats = apiServices.getPowerstats(heroId)
+        if (stats.isSuccessful){
+            return stats.body().right()
         }else{
             return ErrorApp.InternetError.left()
         }
