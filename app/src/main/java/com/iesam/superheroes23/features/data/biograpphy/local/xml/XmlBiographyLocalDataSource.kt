@@ -26,7 +26,7 @@ class XmlBiographyLocalDataSource(
         return true.right()
     }
 
-    override suspend fun getBiography(heroId: Int): Either<ErrorApp, Biography> {
+    override suspend fun getBiography(heroId: Int): Either<ErrorApp, Biography?> {
         try {
             val biography =  sharedPreferences.getString(heroId.toString(), null).let {
                 gson.fromJson(it, Biography::class.java)

@@ -30,7 +30,7 @@ class XmlSuperheroLocalDataSource(
         return true.right()
     }
 
-    override suspend fun getSuperHeroes(): Either<ErrorApp, List<SuperHero>> {
+    override suspend fun getSuperHeroes(): Either<ErrorApp, List<SuperHero>?> {
         try {
             val superHeros: MutableList<SuperHero> = mutableListOf()
             sharedPreferences.all.forEach { map ->

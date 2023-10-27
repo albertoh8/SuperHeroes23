@@ -13,13 +13,8 @@ class BiographyDataRepository(
     private val localSource: BiographyLocalDataRepository
 ) : BiographyRepository {
     override suspend fun getBiographyByHeroId(heroId: Int): Either<ErrorApp, Biography?> {
-        if(localSource.getBiography(heroId).isRight()){
-            return localSource.getBiography(heroId)
-        }else{
             val biograp =  remoteSource.getBiography(heroId)
             biograp.getOrNull()?.let { localSource.saveBiography(heroId,it) }
             return biograp
-        }
-
     }
 }

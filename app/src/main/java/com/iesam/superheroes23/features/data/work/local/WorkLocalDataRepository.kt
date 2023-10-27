@@ -8,5 +8,5 @@ import com.iesam.superheroes23.features.domain.Work
 interface WorkLocalDataRepository {
 
     suspend fun saveWork(heroId: Int, work: Work): Either<ErrorApp,Boolean>
-    suspend fun  getWork(heroId:Int): Either<ErrorApp, Work>
+    suspend fun  getWork(heroId:Int): Either<ErrorApp, Work?>
 }

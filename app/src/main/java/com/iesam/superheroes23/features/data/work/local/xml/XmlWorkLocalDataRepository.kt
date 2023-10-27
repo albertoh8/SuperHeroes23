@@ -27,9 +27,9 @@ class XmlWorkLocalDataRepository(
         return true.right()
     }
 
-    override suspend fun getWork(heroId: Int): Either<ErrorApp, Work> {
+    override suspend fun getWork(heroId: Int): Either<ErrorApp, Work?> {
         try {
-            val work =  sharedPreferences.getString(heroId.toString(), "1").let {
+            val work =  sharedPreferences.getString(heroId.toString(), null).let {
                 gson.fromJson(it, Work::class.java)
             }
             return work.right()
