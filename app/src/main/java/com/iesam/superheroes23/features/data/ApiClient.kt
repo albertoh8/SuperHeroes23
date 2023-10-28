@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient  {
-    val baseUrl :String = "https://dam.sitehub.es/api-curso/superheroes/"
+    val baseUrl :String = "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/"
 
     private val apiServices: ApiService
 
@@ -71,6 +71,15 @@ class ApiClient  {
         val stats = apiServices.getPowerstats(heroId)
         if (stats.isSuccessful){
             return stats.body().right()
+        }else{
+            return ErrorApp.InternetError.left()
+        }
+    }
+
+    suspend fun getHeroById(heroId: Int): Either<ErrorApp,SuperHeroApiModel?>  {
+        val hero = apiServices.getSuperHeroById(heroId)
+        if (hero.isSuccessful){
+            return hero.body().right()
         }else{
             return ErrorApp.InternetError.left()
         }

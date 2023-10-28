@@ -16,7 +16,16 @@ class SuperHeroesRemoteApiSource(
             val heros = apiClient.getAllHeroes().get()?.map { superHero->
                 superHero.toDomain()
             }
-            return heros.right()
+            return heros?.subList(0,10).right()
+        }else{
+            return ErrorApp.InternetError.left()
+        }
+    }
+
+    override suspend fun getHeroById(heroId: Int): Either<ErrorApp, SuperHero?> {
+        if(apiClient.getHeroById(heroId).isRight()){
+            val hero = apiClient.getHeroById(heroId).get()?.toDomain()
+            return hero.right()
         }else{
             return ErrorApp.InternetError.left()
         }

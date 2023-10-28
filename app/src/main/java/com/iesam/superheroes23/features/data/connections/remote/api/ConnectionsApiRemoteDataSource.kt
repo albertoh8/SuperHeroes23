@@ -13,12 +13,11 @@ class ConnectionsApiRemoteDataSource (
     : ConnectionsRemoteDataSource {
 
     override suspend fun getConnections(heroId: Int): Either<ErrorApp,Connections?> {
-        if(apiClient.getConnections(heroId).isRight()){
-            val connection = apiClient.getConnections(heroId).get()?.toDomain()
-
-            return connection.right()
-        }else{
-            return ErrorApp.InternetError.left()
-        }
+       return if(apiClient.getConnections(heroId).isRight()){
+           apiClient.getConnections(heroId).get()?.toDomain().right()
+       }else{
+           ErrorApp.InternetError.left()
+       }
     }
+
 }

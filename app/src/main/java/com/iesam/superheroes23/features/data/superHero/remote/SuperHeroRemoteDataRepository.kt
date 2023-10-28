@@ -7,4 +7,6 @@ import com.iesam.superheroes23.features.domain.SuperHero
 interface SuperHeroRemoteDataRepository {
 
     suspend fun getAllHeroes(): Either<ErrorApp,List<SuperHero>?>
+
+    suspend fun getHeroById(heroId:Int):Either<ErrorApp,SuperHero?>
 }

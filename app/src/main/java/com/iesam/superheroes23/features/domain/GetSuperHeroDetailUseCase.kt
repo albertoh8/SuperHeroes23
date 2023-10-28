@@ -17,15 +17,15 @@ class GetSuperHeroDetailUseCase(
         val connections = connectionsRepository.getConnections(heroId)
         val powerStats = powerStatsRepository.getPowerstats(heroId)
         return SuperHeroDetail(
-            superHero.get().getUrlImageM(),
-            superHero.get().name,
+            superHero.get()!!.getUrlImageM(),
+            superHero.get()!!.name,
             biography.get()!!.alignment,
             biography.get()!!.realName,
             connections.get()!!.groupAffiliation,
             powerStats.get().intelligence,
             powerStats.get().speed,
             powerStats.get().combat,
-            superHero.get().urlImages,
+            superHero.get()!!.urlImages,
             ).right()
     }
 

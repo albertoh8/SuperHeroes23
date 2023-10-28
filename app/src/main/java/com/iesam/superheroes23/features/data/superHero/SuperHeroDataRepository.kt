@@ -19,7 +19,7 @@ class SuperHeroDataRepository(
 
     }
 
-    override fun getHeroById(HeroId: Int): Either<ErrorApp, SuperHero> {
-        TODO("Not yet implemented")
+    override suspend fun getHeroById(heroId: Int): Either<ErrorApp, SuperHero?> {
+        return remoteSource.getHeroById(heroId)
     }
 }

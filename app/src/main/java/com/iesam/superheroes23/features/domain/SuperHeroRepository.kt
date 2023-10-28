@@ -7,5 +7,5 @@ interface SuperHeroRepository {
 
     suspend fun getAllHeroes():Either<ErrorApp,List<SuperHero>?>
 
-    fun getHeroById(HeroId:Int): Either<ErrorApp,SuperHero>
+    suspend fun getHeroById(heroId:Int): Either<ErrorApp,SuperHero?>
 }

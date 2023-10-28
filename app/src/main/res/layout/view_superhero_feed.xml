@@ -10,6 +10,7 @@
     android:background="@color/gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/superheroe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_size_s">

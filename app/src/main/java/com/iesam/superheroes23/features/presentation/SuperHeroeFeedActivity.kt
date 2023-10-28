@@ -1,5 +1,6 @@
 package com.iesam.superheroes23.features.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -93,12 +94,16 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
                     uiState.heroes.apply {
                         skeleton.showOriginal()
                         superHeroAdapter.submitList(uiState.heroes)
+                        superHeroAdapter.setOnClickDetail {
+                            navTopDetail(it)
+                        }
                         binding.filter.addTextChangedListener {
                             val superheroesFiltered = uiState.heroes.filter { superHero ->
                                 superHero.name.contains(it.toString())
                             }
                             superHeroAdapter.submitList(superheroesFiltered)
                         }
+
 
                     }
 
@@ -132,8 +137,12 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
         }else{
             binding.layoutCommonError.commonErrorView.visible()
         }
+    }
 
-
+    fun navTopDetail(id:Int){
+        val intent = Intent(applicationContext, SuperHeroDetailActivity::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 
 

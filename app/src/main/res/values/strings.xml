@@ -6,4 +6,9 @@
     <string name="internet_error">Error de Intenet</string>
     <string name="error">Error</string>
     <string name="search_the_hero">Busca al heroe por nombre</string>
+    <string name="good">Aligment</string>
+    <string name="group_afiliation">Group Afiliation</string>
+    <string name="inteligence">Inteligence</string>
+    <string name="speed">Speed</string>
+    <string name="combat">Combat</string>
 </resources>
