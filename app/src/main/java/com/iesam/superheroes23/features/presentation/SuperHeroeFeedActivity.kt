@@ -2,6 +2,7 @@ package com.iesam.superheroes23.features.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faltenreich.skeletonlayout.Skeleton
@@ -10,6 +11,7 @@ import com.iesam.superheroes23.R
 import com.iesam.superheroes23.app.ErrorApp
 import com.iesam.superheroes23.app.extensions.hide
 import com.iesam.superheroes23.app.extensions.visible
+import com.iesam.superheroes23.app.right
 import com.iesam.superheroes23.databinding.ActivityMainBinding
 import com.iesam.superheroes23.features.data.ApiClient
 import com.iesam.superheroes23.features.data.biograpphy.BiographyDataRepository
@@ -26,6 +28,8 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
     private val skeleton: Skeleton by lazy {
         binding.superHeroesList.applySkeleton(R.layout.view_superhero_feed, 5)
     }
+
+
 
 
     private val viewModel : SuperHeroFeedViewModel by lazy {
@@ -51,6 +55,7 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindView()
         setupObservers()
+
         viewModel.getSuperHeroes()
         setupView()
 
@@ -75,7 +80,14 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
                     }
                     uiState.heroes.apply {
                         skeleton.showOriginal()
-                        superHeroAdapter.setList(uiState.heroes)
+                        superHeroAdapter.submitList(uiState.heroes)
+                        binding.filter.addTextChangedListener {
+                            val superheroesFiltered = uiState.heroes.filter { superHero ->
+                                superHero.name.contains(it.toString())
+                            }
+                            superHeroAdapter.submitList(superheroesFiltered)
+                        }
+
                     }
 
                 }
@@ -99,7 +111,7 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
     }
 
     private fun bindData(superHeroLists: List<GetSuperHeroesFeedUseCase.SuperHeroList>){
-        superHeroAdapter.setList(superHeroLists)
+        superHeroAdapter.submitList(superHeroLists)
     }
     private fun showError(error: ErrorApp) {
         binding.heroList.hide()
