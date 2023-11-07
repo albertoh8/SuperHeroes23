@@ -3,8 +3,10 @@
 
     <!-- CardView Style -->
     <style name="AppCard" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardBackgroundColor">@color/md_theme_dark_primary</item>
+        <item name="cardBackgroundColor">?attr/colorPrimary</item>
     </style>
+
+
 
     <style name="AppShapeableImageCornerList">
         <item name="cornerSize">30dp</item>
@@ -20,7 +22,7 @@
     <style name="DetailCollapsingToolbar" parent="Widget.Material3.CollapsingToolbar.Medium">
         <item name="collapsedTitleTextColor">?attr/colorPrimaryDark</item>
         <item name="background">?attr/colorPrimaryDark</item>
-        <item name="expandedTitleTextColor">?attr/colorPrimary</item>
+        <item name="expandedTitleTextColor">?attr/colorOnPrimary</item>
         <item name="contentScrim">?attr/colorSurface</item>
         <item name="android:textColorPrimary">?attr/colorPrimary</item>
     </style>

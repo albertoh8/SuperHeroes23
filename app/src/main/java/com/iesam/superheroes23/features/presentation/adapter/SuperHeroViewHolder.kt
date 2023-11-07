@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iesam.superheroes23.app.extensions.loadUrl
 import com.iesam.superheroes23.databinding.ViewSuperheroFeedBinding
 import com.iesam.superheroes23.features.domain.GetSuperHeroesFeedUseCase
-import com.iesam.superheroes23.features.presentation.SuperHeroDetailActivity
+import com.iesam.superheroes23.features.presentation.SuperHeroDetailFragment
 
 class SuperHeroViewHolder(val view:View): RecyclerView.ViewHolder(view) {
 
@@ -18,11 +18,7 @@ class SuperHeroViewHolder(val view:View): RecyclerView.ViewHolder(view) {
             heroRealName.text = heroes.fullName
             occupation.text = heroes.occupation
             view.setOnClickListener {
-                view.context.startActivity(
-                    SuperHeroDetailActivity.getIntent(
-                        view.context, heroes.id
-                    )
-                )
+                onClick!!.invoke(heroes.id)
             }
         }
 

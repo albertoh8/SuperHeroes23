@@ -74,4 +74,7 @@ dependencies {
 
     //Material
     implementation ("com.google.android.material:material:1.10.0")
+
+    //Fragment
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 }
