@@ -20,7 +20,7 @@ class GetSuperHeroesFeedUseCase(
                 superHeroe.name,
                 biography.get()!!.realName,
                 work.get()!!.occupation,
-                superHeroe.getUrlImageS()
+                superHeroe.getUrlImageM()
             )
         }
         return list.right()
