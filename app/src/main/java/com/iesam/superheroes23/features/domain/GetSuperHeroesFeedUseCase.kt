@@ -9,7 +9,7 @@ class GetSuperHeroesFeedUseCase(
     private val work : WorkRepository,
     private val biography: BiographyRepository
 ) {
-    suspend fun execute() : Either<ErrorApp,List<SuperHeroList>? > {
+    suspend fun execute() : Either<ErrorApp,List<SuperHeroList> > {
         val heros  = hero.getAllHeroes()
 
         val list = heros.get()?.map { superHeroe ->
@@ -23,7 +23,7 @@ class GetSuperHeroesFeedUseCase(
                 superHeroe.getUrlImageM()
             )
         }
-        return list.right()
+        return list!!.right()
     }
 
     data class SuperHeroList(

@@ -1,12 +1,15 @@
 package com.iesam.superheroes23.features.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 import com.iesam.superheroes23.R
 import com.iesam.superheroes23.app.ErrorApp
+import com.iesam.superheroes23.app.extensions.hide
+import com.iesam.superheroes23.app.extensions.visible
 import com.iesam.superheroes23.databinding.ActivityMainBinding
 import com.iesam.superheroes23.features.data.ApiClient
 import com.iesam.superheroes23.features.data.biograpphy.BiographyDataRepository
@@ -17,11 +20,13 @@ import com.iesam.superheroes23.features.data.work.WorkDataRepository
 import com.iesam.superheroes23.features.data.work.remote.api.WorkRemoteApiDataSource
 import com.iesam.superheroes23.features.domain.GetSuperHeroesFeedUseCase
 import com.iesam.superheroes23.features.presentation.adapter.SuperHeroesAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class SuperHeroeFeedActivity : AppCompatActivity() {
+
+    private val skeleton: Skeleton by lazy {
+        binding.superHeroesList.applySkeleton(R.layout.view_superhero_feed, 5)
+    }
+
 
     private val viewModel : SuperHeroFeedViewModel by lazy {
         SuperHeroFeedViewModel(
@@ -45,8 +50,10 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindView()
-        setupView()
         setupObservers()
+        viewModel.getSuperHeroes()
+        setupView()
+
     }
 
 
@@ -58,19 +65,24 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.getSuperHeroes()
-        val observer = Observer<SuperHeroFeedViewModel.UiState>{
-            it.heroes?.apply {
-                bindData(this)
+        val observer =
+            Observer<SuperHeroFeedViewModel.UiState> { uiState ->
+                if (uiState.isLoading) {
+                    skeleton.showSkeleton()
+                } else {
+                    uiState.errorApp?.apply {
+                        showError(uiState.errorApp)
+                    }
+                    uiState.heroes.apply {
+                        skeleton.showOriginal()
+                        superHeroAdapter.setList(uiState.heroes)
+                    }
+
+                }
             }
-            it.errorApp?.apply {
-                showError(it.errorApp)
-            }
-            it.isLoading?.apply {
-                showLoading()
-            }
-        }
-        viewModel.uiState.observe(this, observer)
+
+
+        viewModel.uiState.observe(this,observer)
     }
 
 
@@ -89,12 +101,17 @@ class SuperHeroeFeedActivity : AppCompatActivity() {
     private fun bindData(superHeroLists: List<GetSuperHeroesFeedUseCase.SuperHeroList>){
         superHeroAdapter.setList(superHeroLists)
     }
-    private fun showError(it: ErrorApp) {
+    private fun showError(error: ErrorApp) {
+        binding.heroList.hide()
+        if(error == ErrorApp.InternetError){
+            binding.layoutInternetError.errorView.visible()
+        }else{
+            binding.layoutCommonError.commonErrorView.visible()
+        }
+
 
     }
-    private fun showLoading(){
 
-    }
 
 
 }
