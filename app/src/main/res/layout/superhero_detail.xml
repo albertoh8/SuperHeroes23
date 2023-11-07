@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/margin_size_s"
+    android:id="@+id/hero_detail"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/hero_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/img_size_l"
+        android:scaleType="centerCrop"
+        tools:background="@tools:sample/avatars"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/hero_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_s"
+        android:textSize="@dimen/text_size_l"
+        tools:text="@string/name"
+        app:layout_constraintStart_toStartOf="@id/hero_img"
+        app:layout_constraintTop_toBottomOf="@id/hero_img"/>
+
+    <TextView
+        android:id="@+id/hero_aligment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/good"
+        android:layout_marginEnd="@dimen/margin_size_s"
+        android:textSize="@dimen/text_size_m"
+        app:layout_constraintEnd_toEndOf="@id/hero_img"
+        app:layout_constraintTop_toTopOf="@id/hero_name"/>
+
+    <TextView
+        android:id="@+id/hero_realname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_s"
+        android:textSize="@dimen/text_size_m"
+        tools:text="@string/real_name"
+        app:layout_constraintStart_toStartOf="@id/hero_img"
+        app:layout_constraintTop_toBottomOf="@id/hero_name"/>
+
+    <TextView
+        android:id="@+id/group_affiliation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_s"
+        android:textSize="@dimen/text_size_m"
+        tools:text="@string/group_afiliation"
+        app:layout_constraintStart_toStartOf="@id/hero_img"
+        app:layout_constraintTop_toBottomOf="@id/hero_realname"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inteligence"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.33"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_affiliation">
+
+        <TextView
+            android:id="@+id/label_inteligence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/inteligence" />
+        <TextView
+            android:id="@+id/label_inteligence_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_inteligence"
+            tools:text="10" />
+
+        <View
+            android:id="@+id/vertical_separator_inteligence"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/speed"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.33"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_m"
+        app:layout_constraintStart_toEndOf="@id/inteligence"
+        app:layout_constraintTop_toBottomOf="@id/group_affiliation">
+
+        <TextView
+            android:id="@+id/label_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/speed" />
+        <TextView
+            android:id="@+id/label_speed_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_speed"
+            tools:text="10" />
+
+        <View
+            android:id="@+id/vertical_separator_speed"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/combat"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.33"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_m"
+        app:layout_constraintStart_toEndOf="@id/speed"
+        app:layout_constraintTop_toBottomOf="@id/group_affiliation">
+
+        <TextView
+            android:id="@+id/label_combat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/combat" />
+        <TextView
+            android:id="@+id/label_combat_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_combat"
+            tools:text="10" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_images"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_size_s"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/hero_img"
+        app:layout_constraintStart_toStartOf="@id/hero_img"
+        app:layout_constraintTop_toBottomOf="@id/inteligence" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

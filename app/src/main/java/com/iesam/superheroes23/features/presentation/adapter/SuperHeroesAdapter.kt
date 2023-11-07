@@ -10,6 +10,11 @@ import com.iesam.superheroes23.features.presentation.SuperHeroDiffUtil
 
 class SuperHeroesAdapter() : ListAdapter<GetSuperHeroesFeedUseCase.SuperHeroList,SuperHeroViewHolder>(SuperHeroDiffUtil()) {
 
+    private var onClick: ((Int) -> Unit)? = null
+
+    fun setOnClickDetail(onClick: ((Int) -> Unit)){
+        this.onClick= onClick
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_superhero_feed,parent,false)
@@ -19,6 +24,6 @@ class SuperHeroesAdapter() : ListAdapter<GetSuperHeroesFeedUseCase.SuperHeroList
     override fun getItemCount(): Int = currentList.size
 
     override fun onBindViewHolder(holder: SuperHeroViewHolder, position: Int) {
-        holder.bind(currentList.get(position))
+        holder.bind(currentList.get(position), onClick)
     }
 }
