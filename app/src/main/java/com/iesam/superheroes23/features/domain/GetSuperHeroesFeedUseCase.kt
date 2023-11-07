@@ -1,25 +1,29 @@
 package com.iesam.superheroes23.features.domain
 
+import com.iesam.superheroes23.app.Either
+import com.iesam.superheroes23.app.ErrorApp
+import com.iesam.superheroes23.app.right
+
 class GetSuperHeroesFeedUseCase(
     private val hero: SuperHeroRepository,
     private val work : WorkRepository,
     private val biography: BiographyRepository
 ) {
-    suspend fun execute() : List<SuperHeroList>{
+    suspend fun execute() : Either<ErrorApp,List<SuperHeroList>? > {
         val heros  = hero.getAllHeroes()
 
-        val list = heros.get().map {superHeroe ->
+        val list = heros.get()?.map { superHeroe ->
             val work = work.getWorkByHeroId(superHeroe.id)
             val biography = biography.getBiographyByHeroId(superHeroe.id)
             SuperHeroList(
                 superHeroe.id,
                 superHeroe.name,
-                biography.get().realName,
-                work.get().occupation,
+                biography.get()!!.realName,
+                work.get()!!.occupation,
                 superHeroe.getUrlImageS()
             )
         }
-        return list
+        return list.right()
     }
 
     data class SuperHeroList(
