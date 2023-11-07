@@ -1,20 +1,20 @@
 package com.iesam.superheroes23.features.presentation
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faltenreich.skeletonlayout.Skeleton
-import com.faltenreich.skeletonlayout.applySkeleton
 import com.iesam.superhero.data.connections.remote.api.ConnectionsApiRemoteDataSource
 import com.iesam.superhero.data.powerstats.PowerStatsDataRepository
 import com.iesam.superhero.data.powerstats.local.xml.XmlPowerStatsLocalDataSource
 import com.iesam.superhero.data.powerstats.remote.api.PowerStatsApiRemoteDataSource
-import com.iesam.superheroes23.R
 import com.iesam.superheroes23.app.extensions.loadUrl
-import com.iesam.superheroes23.databinding.SuperheroDetailBinding
+import com.iesam.superheroes23.databinding.FragmentSuperheroDetailBinding
 import com.iesam.superheroes23.features.data.ApiClient
 import com.iesam.superheroes23.features.data.biograpphy.BiographyDataRepository
 import com.iesam.superheroes23.features.data.biograpphy.local.xml.XmlBiographyLocalDataSource
@@ -27,46 +27,67 @@ import com.iesam.superheroes23.features.data.superHero.remote.api.SuperHeroesRem
 import com.iesam.superheroes23.features.domain.GetSuperHeroDetailUseCase
 import com.iesam.superheroes23.features.presentation.adapter.SuperHeroDetailsAdapter
 
-class SuperHeroDetailActivity : AppCompatActivity() {
+class SuperHeroDetailFragment : Fragment() {
 
     private val viewModel : SuperHeroDetailViewModel by lazy {
         SuperHeroDetailViewModel(GetSuperHeroDetailUseCase(
             SuperHeroDataRepository(
                 SuperHeroesRemoteApiSource(ApiClient()),
-                XmlSuperheroLocalDataSource(this)),
+                XmlSuperheroLocalDataSource(requireContext())),
             BiographyDataRepository(
                 BiographyRemoteApiSource(ApiClient()),
-                XmlBiographyLocalDataSource(this)
+                XmlBiographyLocalDataSource(requireContext())
             ),
             ConnectionsDataRepository(
                 ConnectionsApiRemoteDataSource(ApiClient()),
-                XmlConnectionLocalDataSource(this)
+                XmlConnectionLocalDataSource(requireContext())
             ),
             PowerStatsDataRepository(
-                XmlPowerStatsLocalDataSource(this),
+                XmlPowerStatsLocalDataSource(requireContext()),
                 PowerStatsApiRemoteDataSource(ApiClient())
             )))
 
     }
 
-    lateinit var binding : SuperheroDetailBinding
+    private var _binding: FragmentSuperheroDetailBinding? = null
+    private val binding get() = _binding!!
     private val superHeroDetailAdapter = SuperHeroDetailsAdapter()
 
     private var skeleton: Skeleton? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bindView()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSuperheroDetailBinding.inflate(inflater, container, false)
+        setupView()
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        viewModel.getHeroDetail(getSuperHeroId())
+        setFragmentResultListener("requestKey"){requestKey, bundle ->
+            val result = bundle.getInt("bundleKey")
+            viewModel.getHeroDetail(result)
+        }
     }
 
-    private fun bindView() {
-        binding = SuperheroDetailBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+    fun setupView(){
+        binding.apply {
+            listImages.apply {
+                layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                adapter = superHeroDetailAdapter
+            }
+        }
     }
+
+
 
     private fun setupObservers() {
 
@@ -81,7 +102,7 @@ class SuperHeroDetailActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.uiState.observe(this,observer)
+        viewModel.uiState.observe(viewLifecycleOwner,observer)
     }
 
     private fun bindData(hero : GetSuperHeroDetailUseCase.SuperHeroDetail?){
@@ -97,7 +118,7 @@ class SuperHeroDetailActivity : AppCompatActivity() {
             listImages.adapter = superHeroDetailAdapter
             listImages.layoutManager =
                 LinearLayoutManager(
-                    this@SuperHeroDetailActivity,
+                    requireContext(),
                     LinearLayoutManager.HORIZONTAL,
                     false
                 )
@@ -105,15 +126,8 @@ class SuperHeroDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSuperHeroId(): Int = intent.getIntExtra(KEY_SUPERHEROE_ID, 0)
     companion object {
-        private val KEY_SUPERHEROE_ID = "key_superheroe_id"
-
-        fun getIntent(context: Context, herId: Int): Intent {
-            val intent = Intent(context, SuperHeroDetailActivity::class.java)
-            intent.putExtra(KEY_SUPERHEROE_ID, herId)
-            return intent
-        }
+        fun newInstance() = SuperHeroDetailFragment()
     }
 
 }
