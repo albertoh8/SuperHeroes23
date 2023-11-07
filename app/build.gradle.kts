@@ -68,4 +68,7 @@ dependencies {
 
     //Skeleton
     implementation ("com.faltenreich:skeletonlayout:5.0.0")
+
+    //Gson
+    implementation("com.google.code.gson:gson:2.10.1")
 }

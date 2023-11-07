@@ -5,7 +5,6 @@ import com.iesam.superheroes23.app.ErrorApp
 import com.iesam.superheroes23.app.left
 import com.iesam.superheroes23.app.right
 import com.iesam.superheroes23.features.data.ApiClient
-import com.iesam.superheroes23.features.data.ApiService
 import com.iesam.superheroes23.features.data.work.remote.WorkRemoteDataRepository
 import com.iesam.superheroes23.features.domain.Work
 
