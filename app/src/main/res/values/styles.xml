@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CardView Style -->
+    <style name="AppCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/md_theme_dark_primary</item>
+    </style>
+
+    <style name="AppShapeableImageCornerList">
+        <item name="cornerSize">30dp</item>
+
+    </style>
+    <style name="AppShapeableImageCornerDetail">
+        <item name="cornerSize">20dp</item>
+        <item name="cornerFamily">cut</item>
+        <item name="strokeColor">?attr/colorOnPrimary</item>
+        <item name="strokeWidth">5dp</item>
+    </style>
+
+    <style name="DetailCollapsingToolbar" parent="Widget.Material3.CollapsingToolbar.Medium">
+        <item name="collapsedTitleTextColor">?attr/colorPrimaryDark</item>
+        <item name="background">?attr/colorPrimaryDark</item>
+        <item name="expandedTitleTextColor">?attr/colorPrimary</item>
+        <item name="contentScrim">?attr/colorSurface</item>
+        <item name="android:textColorPrimary">?attr/colorPrimary</item>
+    </style>
+
+    <style name="AppToolbar" parent="Widget.Material3.CollapsingToolbar">
+        <item name="height">64dp</item>
+        <item name="collapsedTitleTextColor">?attr/colorOnPrimary</item>
+        <item name="background">?attr/colorPrimaryDark</item>
+        <item name="expandedTitleTextColor">?attr/colorPrimary</item>
+        <item name="contentScrim">?attr/colorSurface</item>
+        <item name="android:textColorPrimary">?attr/colorPrimary</item>
+    </style>
+
+    <style name="TextViewStyleOnPrimary" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textColor">@color/md_theme_dark_onPrimary</item>
+    </style>
+
+    <style name="TextViewStyleOnSecundary" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textColor">@color/md_theme_dark_onSecondary</item>
+    </style>
+
+    <style name="TextViewStyleOnTertiary" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textColor">@color/md_theme_dark_onTertiary</item>
+    </style>
+
+    <style name="TextViewStyleOnBackground" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textColor">@color/md_theme_dark_onBackground</item>
+    </style>
+
+
+</resources>

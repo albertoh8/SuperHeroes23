@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/margin_size_s"
-    android:id="@+id/hero_detail"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    android:background="@color/md_theme_dark_background"
+    android:id="@+id/hero_detail">
 
-    <ImageView
+    <include
+        android:id="@+id/detail_toolbar"
+        layout="@layout/view_detail_toolbar"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/hero_img"
         android:layout_width="match_parent"
         android:layout_height="@dimen/img_size_l"
+        android:layout_margin="@dimen/margin_size_s"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
-        tools:background="@tools:sample/avatars"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/detail_toolbar"
+        app:shapeAppearanceOverlay="@style/AppShapeableImageCornerDetail"
+        app:strokeColor="@color/md_theme_dark_onBackground"
+        app:strokeWidth="5dp"
+        tools:background="@tools:sample/avatars" />
 
     <TextView
+        style="@style/TextViewStyleOnBackground"
         android:id="@+id/hero_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,12 +47,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/good"
+        style="@style/TextViewStyleOnBackground"
         android:layout_marginEnd="@dimen/margin_size_s"
         android:textSize="@dimen/text_size_m"
         app:layout_constraintEnd_toEndOf="@id/hero_img"
         app:layout_constraintTop_toTopOf="@id/hero_name"/>
 
     <TextView
+        style="@style/TextViewStyleOnBackground"
         android:id="@+id/hero_realname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,6 +65,7 @@
         app:layout_constraintTop_toBottomOf="@id/hero_name"/>
 
     <TextView
+        style="@style/TextViewStyleOnBackground"
         android:id="@+id/group_affiliation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,21 +85,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/group_affiliation">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_inteligence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            style="@style/TextViewStyleOnBackground"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/inteligence" />
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_inteligence_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            style="@style/TextViewStyleOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label_inteligence"
@@ -90,7 +111,7 @@
             android:id="@+id/vertical_separator_inteligence"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:background="@color/black"
+            android:background="@color/md_theme_dark_outline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -106,21 +127,23 @@
         app:layout_constraintStart_toEndOf="@id/inteligence"
         app:layout_constraintTop_toBottomOf="@id/group_affiliation">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textStyle="bold"
+            style="@style/TextViewStyleOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/speed" />
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_speed_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            style="@style/TextViewStyleOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label_speed"
@@ -130,7 +153,7 @@
             android:id="@+id/vertical_separator_speed"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:background="@color/black"
+            android:background="@color/md_theme_dark_outline"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -146,21 +169,23 @@
         app:layout_constraintStart_toEndOf="@id/speed"
         app:layout_constraintTop_toBottomOf="@id/group_affiliation">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_combat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textStyle="bold"
+            style="@style/TextViewStyleOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/combat" />
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/label_combat_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            style="@style/TextViewStyleOnBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/label_combat"
@@ -171,14 +196,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_images"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_size_s"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/hero_img"
         app:layout_constraintStart_toStartOf="@id/hero_img"
-        app:layout_constraintTop_toBottomOf="@id/inteligence" />
+        app:layout_constraintTop_toBottomOf="@id/inteligence"
+        tools:listitem="@layout/view_item_superhero_detail" />
 
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
